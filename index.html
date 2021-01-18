@@ -3,11 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>chạy đi đâu vùi chôn nỗi buồn</h1>
-    <h2>tui là ai và ai là tui cứ mãi là</h2>
+    <title>bai 1</title>
     
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+</head>
+<script>
+ var app = angular.module("myapp",[]);
+ app.controller("myctrl",function($scope){
+    $scope.ages=[
+        {
+            age:"Dưới 25",
+            rate: 0.07
+        },
+        {
+            age:"Từ 25 đến 40",
+            rate:0.1
+        },
+        {
+            age:"Trên 40",
+            rate:0.15
+        }
+    ];
+    $scope.age =$scope.ages[1];
+    $scope.gender ="NAM";
+     $scope.getBonous = function(){
+        var bonus = $scope.age.rate * $scope.salary;
+        if($scope.gender=="NU"){
+            bonus +=20000;
+        }
+        return bonus;
+     }
+ })
+</script>
+<body>
+    <div class="container" ng-app="myapp" ng-controller="myctrl">
+        <div class="card card-default">
+            <div class="card-header">
+                <h2 class="card-title">TÍNH THƯỞNG TẾT NGUYÊN ĐÁN</h2>
+            </div>
+            <form action="" class="card">
+                <div class="form-group">
+                    <label for="">Họ và tên</label>
+                    <input ng-model="fullname" type="text" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label for="">Lương</label>
+                    <div class="input-group">
+                        <input type="text" ng-model="salary" class="form-control">
+                    </div>
+                    <div class="input-group-addon">VNĐ</div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="">Giới tính</label>
+                        <div class="radio">
+                            <label for=""><input type="radio" ng-model="gender" value="NAM">Nam</label>
+                            <label for=""><input type="radio" ng-model="gender" value="NU">Nữ</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Độ tuổi</label>
+                    <select name="" class="form-control"    ng-model="age" ng-options="x.age for x in ages" id=""></select>
+                </div>
+            </form>
+            <div class="card-footer">
+                TIỀN THƯỞNG:  <strong>{{getBonous()|number:2}}</strong> VNĐ
+            </div>
+        </div>
+    </div>
 </body>
 </html>
